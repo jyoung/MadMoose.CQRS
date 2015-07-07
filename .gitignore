@@ -5,6 +5,7 @@ App_Data/
 Publish/
 packages/
 Reports/
+NuGet/
 combined_*.js
 combined_*.css
 _sgbak
