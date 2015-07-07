@@ -17,19 +17,19 @@
             var commandType = command.GetType();
             var handlerType = typeof (ICommandHandler<,>).MakeGenericType(commandType, typeof (TResponse));
 
-            var handler = (ICommandHandler<ICommand<TResponse>, TResponse>)container.GetInstance(handlerType);
+            dynamic handler = container.GetInstance(handlerType);
             
-            return await handler.Handle(command);
+            return await handler.Handle((dynamic)command);
         }
 
         public async Task<TResponse> ExecuteAsync<TResponse>(IQuery<TResponse> query)
         {
             var queryType = query.GetType();
-            var handlerType = typeof(ICommandHandler<,>).MakeGenericType(queryType, typeof(TResponse));
+            var handlerType = typeof(IQueryHandler<,>).MakeGenericType(queryType, typeof(TResponse));
 
-            var handler = (IQueryHandler<IQuery<TResponse>, TResponse>)container.GetInstance(handlerType);
+            dynamic handler = container.GetInstance(handlerType);
 
-            return await handler.Handle(query);
+            return await handler.Handle((dynamic)query);
         }
 
         public async Task PublishAsync(IEvent @event)
@@ -39,9 +39,9 @@
 
             var handlers = container.GetAllInstances(handlerType);
 
-            foreach (var handler in handlers)
+            foreach (dynamic handler in handlers)
             {
-                await ((IEventHandler<IEvent>) handler).Handle(@event);
+                await handler.Handle((dynamic) @event);
             }
         }
     }
