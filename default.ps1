@@ -60,7 +60,7 @@ task Run-Specs -Description "Runs all specifications" -Depends Build-Debug {
 
 # The pack (and release) tasks require a version parameter, you can pass the version on the command line
 # like  invoke-psake pack-release -parameters @{"version"="1.2.3.4"}
-task Pack-Release -Description "Creates a NuGet package based on the release build" -depends Build-Init {
+task Pack-Release -Description "Creates a NuGet package based on the release build" -depends Build-Release {
            
 	$version = Get-VersionFn $nuspec $versionOverride
     
