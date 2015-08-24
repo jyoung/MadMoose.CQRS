@@ -14,7 +14,7 @@
     <licenseUrl>https://bitbucket.org/madmoosesoftware/madmoose.cqrs/raw/5a1f93e098c480046b7d1864c9a025d3849d3c87/license.txt</licenseUrl>
     <dependencies>
       <group targetFramework="net45">
-        <dependency id="SimpleInjector" version="2.8.0" />
+        <dependency id="SimpleInjector" version="3.0.1" />
       </group>
     </dependencies>
   </metadata>

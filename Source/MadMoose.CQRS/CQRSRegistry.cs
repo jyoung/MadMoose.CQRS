@@ -2,7 +2,6 @@
 {
     using System.Reflection;
     using SimpleInjector;
-    using SimpleInjector.Extensions;
 
     public static class CQRSRegistry
     {
@@ -15,9 +14,9 @@
         {
             container.Register<IMediator, SimpleInjectorMediator>();
 
-            container.RegisterManyForOpenGeneric(typeof(IQueryHandler<,>), assemblies);
-            container.RegisterManyForOpenGeneric(typeof(ICommandHandler<,>), assemblies);
-            container.RegisterManyForOpenGeneric(typeof(IEventHandler<>), container.RegisterAll, assemblies);
+            container.Register(typeof(IQueryHandler<,>), assemblies);
+            container.Register(typeof(ICommandHandler<,>), assemblies);
+            container.RegisterCollection(typeof(IEventHandler<>), assemblies);
         }
     }
 }

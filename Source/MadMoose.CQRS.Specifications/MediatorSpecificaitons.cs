@@ -1,5 +1,6 @@
 ﻿namespace MadMoose.CQRS.Specifications
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Reflection;
@@ -8,7 +9,6 @@
     using NUnit.Framework;
     using Shouldly;
     using SimpleInjector;
-    using SimpleInjector.Extensions;
 
     public abstract class MediatorSpecificaiton : Specification
     {
@@ -20,12 +20,12 @@
             container = new Container();
 
             // register objects with the container
-            var assembly = Assembly.GetExecutingAssembly();
+            var assembly = new [] {Assembly.GetExecutingAssembly()};
 
             container.Register<IMediator, SimpleInjectorMediator>();
-            container.RegisterManyForOpenGeneric(typeof(ICommandHandler<,>), assembly);
-            container.RegisterManyForOpenGeneric(typeof(IQueryHandler<,>), assembly);
-            container.RegisterManyForOpenGeneric(typeof(IEventHandler<>), container.RegisterAll, assembly);
+            container.Register(typeof(ICommandHandler<,>), assembly);
+            container.Register(typeof(IQueryHandler<,>), assembly);
+            container.RegisterCollection(typeof(IEventHandler<>), assembly);
 
             container.Verify();
         }
