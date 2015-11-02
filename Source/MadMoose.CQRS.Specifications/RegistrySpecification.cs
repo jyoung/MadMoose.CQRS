@@ -1,14 +1,9 @@
 ﻿namespace MadMoose.CQRS.Specifications
 {
     using System.Reflection;
-    using Commands;
-    using Events;
-    using FluentValidation;
     using MadMoose.Specifications;
     using NUnit.Framework;
-    using Queries;
     using SimpleInjector;
-    using Validation;
 
     public abstract class RegistrySpecification : Specification
     {

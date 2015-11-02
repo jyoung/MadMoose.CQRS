@@ -3,8 +3,8 @@
     using System.Collections.Generic;
     using Queries;
 
-    public class FakeQuery : IQuery<IList<int>>
+    public class AnotherFakeQuery : IQuery<IList<int>>
     {
-        public string Parameter { get; set; }
+         
     }
 }

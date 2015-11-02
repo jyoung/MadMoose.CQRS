@@ -64,6 +64,8 @@
     <Compile Include="Fakes\AnotherFakeCommand.cs" />
     <Compile Include="Fakes\AnotherFakeCommandHandler.cs" />
     <Compile Include="EventCatcher.cs" />
+    <Compile Include="Fakes\AnotherFakeQuery.cs" />
+    <Compile Include="Fakes\AnotherFakeQueryHandler.cs" />
     <Compile Include="Fakes\FakeCommand.cs" />
     <Compile Include="Fakes\FakeCommandHandler.cs" />
     <Compile Include="Fakes\FakeCommandValidator.cs" />
@@ -72,6 +74,7 @@
     <Compile Include="Fakes\FakeEventHandler2.cs" />
     <Compile Include="Fakes\FakeQuery.cs" />
     <Compile Include="Fakes\FakeQueryHandler.cs" />
+    <Compile Include="Fakes\FakeQueryValidator.cs" />
     <Compile Include="MediatorSpecificaitons.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegistrySpecification.cs" />
