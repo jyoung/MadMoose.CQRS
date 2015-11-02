@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=5.6.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.5.6.2.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MadMoose.Specifications, Version=1.0.22.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MadMoose.Specifications.1.0.22\lib\net45\MadMoose.Specifications.dll</HintPath>
       <Private>True</Private>
@@ -57,9 +61,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnotherFakeCommand.cs" />
+    <Compile Include="AnotherFakeCommandHandler.cs" />
     <Compile Include="EventCatcher.cs" />
     <Compile Include="FakeCommand.cs" />
     <Compile Include="FakeCommandHandler.cs" />
+    <Compile Include="FakeCommandValidator.cs" />
     <Compile Include="FakeEvent.cs" />
     <Compile Include="FakeEventHandler1.cs" />
     <Compile Include="FakeEventHandler2.cs" />

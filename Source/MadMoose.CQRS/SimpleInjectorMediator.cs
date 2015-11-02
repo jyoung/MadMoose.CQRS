@@ -1,6 +1,7 @@
 ﻿namespace MadMoose.CQRS
 {
     using System.Threading.Tasks;
+    using FluentValidation.Results;
     using SimpleInjector;
 
     public class SimpleInjectorMediator : IMediator
@@ -16,32 +17,52 @@
         {
             var commandType = command.GetType();
             var handlerType = typeof (ICommandHandler<,>).MakeGenericType(commandType, typeof (TResponse));
+            var validatorType = typeof (ICommandValidator<>).MakeGenericType(commandType);
+
+            dynamic validator = container.GetInstance(validatorType);
+
+            var result = (ValidationResult) await validator.ValidateAsync((dynamic) command);
+
+            if (result.IsValid == false)
+            {
+                throw new ValidationException(result);
+            }
 
             dynamic handler = container.GetInstance(handlerType);
-            
-            return await handler.Handle((dynamic)command);
+
+            return await handler.HandleAsync((dynamic) command);
         }
 
         public async Task<TResponse> ExecuteAsync<TResponse>(IQuery<TResponse> query)
         {
             var queryType = query.GetType();
-            var handlerType = typeof(IQueryHandler<,>).MakeGenericType(queryType, typeof(TResponse));
+            var handlerType = typeof (IQueryHandler<,>).MakeGenericType(queryType, typeof (TResponse));
+            var validatorType = typeof (ICommandValidator<>).MakeGenericType(queryType);
+
+            dynamic validator = container.GetInstance(validatorType);
+
+            var result = (ValidationResult) await validator.ValidateAsync((dynamic) query);
+
+            if (result.IsValid == false)
+            {
+                throw new ValidationException(result);
+            }
 
             dynamic handler = container.GetInstance(handlerType);
 
-            return await handler.Handle((dynamic)query);
+            return await handler.HandleAsync((dynamic) query);
         }
 
         public async Task PublishAsync(IEvent @event)
         {
             var eventType = @event.GetType();
-            var handlerType = typeof(IEventHandler<>).MakeGenericType(eventType);
+            var handlerType = typeof (IEventHandler<>).MakeGenericType(eventType);
 
             var handlers = container.GetAllInstances(handlerType);
 
             foreach (dynamic handler in handlers)
             {
-                await handler.Handle((dynamic) @event);
+                await handler.HandleAsync((dynamic) @event);
             }
         }
     }

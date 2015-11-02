@@ -17,6 +17,10 @@
             container.Register(typeof(IQueryHandler<,>), assemblies);
             container.Register(typeof(ICommandHandler<,>), assemblies);
             container.RegisterCollection(typeof(IEventHandler<>), assemblies);
+
+            // null validators
+            container.RegisterConditional(typeof(ICommandValidator<>), typeof(NullCommandValidator<>), c => !c.Handled);
+            container.RegisterConditional(typeof(IQueryValidator<>), typeof(NullQueryValidator<>), c => !c.Handled);
         }
     }
 }

@@ -4,7 +4,7 @@
 
     public class FakeEventHandler2 : IEventHandler<FakeEvent>
     {
-        public Task Handle(FakeEvent @event)
+        public Task HandleAsync(FakeEvent @event)
         {
             EventCatcher.Catch("EventHandler2");
 

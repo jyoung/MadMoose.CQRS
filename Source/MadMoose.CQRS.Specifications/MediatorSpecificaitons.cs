@@ -25,6 +25,10 @@
             container.Register<IMediator, SimpleInjectorMediator>();
             container.Register(typeof(ICommandHandler<,>), assembly);
             container.Register(typeof(IQueryHandler<,>), assembly);
+
+            container.Register(typeof(ICommandValidator<>), assembly);
+            container.RegisterConditional(typeof(ICommandValidator<>), typeof(NullCommandValidator<>), c => !c.Handled);
+
             container.RegisterCollection(typeof(IEventHandler<>), assembly);
 
             container.Verify();
@@ -42,6 +46,24 @@
             public override void When()
             {
                 response = mediator.ExecuteAsync(new FakeCommand());
+
+                Task.WaitAll(response);
+            }
+
+            [Test]
+            public void it_should_return_the_result()
+            {
+                response.Result.ShouldBe(Nothing.AtAll);
+            }
+        }
+
+        public class When_executing_a_command_that_does_not_have_a_validator : MediatorSpecificaiton
+        {
+            private Task<Nothing> response;
+
+            public override void When()
+            {
+                response = mediator.ExecuteAsync(new AnotherFakeCommand());
 
                 Task.WaitAll(response);
             }
