@@ -1,7 +1,8 @@
-﻿namespace MadMoose.CQRS.Specifications
+﻿namespace MadMoose.CQRS.Specifications.Fakes
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Queries;
 
     public class FakeQueryHandler : IQueryHandler<FakeQuery, IList<int>>
     {

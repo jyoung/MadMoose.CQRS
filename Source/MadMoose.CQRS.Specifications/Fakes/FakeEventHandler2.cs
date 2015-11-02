@@ -1,6 +1,7 @@
-﻿namespace MadMoose.CQRS.Specifications
+﻿namespace MadMoose.CQRS.Specifications.Fakes
 {
     using System.Threading.Tasks;
+    using Events;
 
     public class FakeEventHandler2 : IEventHandler<FakeEvent>
     {

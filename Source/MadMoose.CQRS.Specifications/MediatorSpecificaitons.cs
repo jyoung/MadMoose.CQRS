@@ -5,10 +5,16 @@
     using System.Linq;
     using System.Reflection;
     using System.Threading.Tasks;
+    using Commands;
+    using Events;
+    using Fakes;
+    using FluentValidation;
     using MadMoose.Specifications;
     using NUnit.Framework;
+    using Queries;
     using Shouldly;
     using SimpleInjector;
+    using Validation;
 
     public abstract class MediatorSpecificaiton : Specification
     {
@@ -20,17 +26,19 @@
             container = new Container();
 
             // register objects with the container
-            var assembly = new [] {Assembly.GetExecutingAssembly()};
+            var assemblies = new [] {Assembly.GetExecutingAssembly()};
 
             container.Register<IMediator, SimpleInjectorMediator>();
-            container.Register(typeof(ICommandHandler<,>), assembly);
-            container.Register(typeof(IQueryHandler<,>), assembly);
+            container.Register<IValidatorFactory, SimpleInjectorValidatorFactory>();
+            container.Register(typeof(ICommandHandler<,>), assemblies);
+            container.Register(typeof(IQueryHandler<,>), assemblies);
+            container.RegisterCollection(typeof(IEventHandler<>), assemblies);
 
-            container.Register(typeof(ICommandValidator<>), assembly);
-            container.RegisterConditional(typeof(ICommandValidator<>), typeof(NullCommandValidator<>), c => !c.Handled);
+            container.Register(typeof(IValidator<>), assemblies);
 
-            container.RegisterCollection(typeof(IEventHandler<>), assembly);
-
+            // null validators
+            container.RegisterConditional(typeof(IValidator<>), typeof(NullValidator<>), c => !c.Handled);
+            
             container.Verify();
         }
         
@@ -45,7 +53,7 @@
 
             public override void When()
             {
-                response = mediator.ExecuteAsync(new FakeCommand());
+                response = mediator.ExecuteAsync(new FakeCommand() { Message = "Test"});
 
                 Task.WaitAll(response);
             }
@@ -74,6 +82,31 @@
                 response.Result.ShouldBe(Nothing.AtAll);
             }
         }
+
+        public class When_executing_a_command_that_fails_validation : MediatorSpecificaiton
+        {
+            private Exception exception;
+
+            public override void When()
+            {
+                try
+                {
+                    mediator.ExecuteAsync(new FakeCommand()).Wait();
+                }
+                catch (Exception e)
+                {
+                    exception = e.InnerException;
+                }
+            }
+
+            [Test]
+            public void it_should_throw_a_validation_exception()
+            {
+                exception.ShouldNotBe(null);
+                exception.ShouldBeOfType<ValidationException>();
+            }
+        }
+
 
         public class When_executing_a_query : MediatorSpecificaiton
         {

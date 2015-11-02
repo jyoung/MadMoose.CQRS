@@ -1,4 +1,4 @@
-﻿namespace MadMoose.CQRS
+﻿namespace MadMoose.CQRS.Queries
 {
     public interface IQuery
     {

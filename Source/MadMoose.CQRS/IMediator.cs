@@ -1,6 +1,9 @@
 ﻿namespace MadMoose.CQRS
 {
     using System.Threading.Tasks;
+    using Commands;
+    using Events;
+    using Queries;
 
     public interface IMediator
     {

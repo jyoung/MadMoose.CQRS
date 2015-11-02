@@ -1,7 +1,12 @@
 ﻿namespace MadMoose.CQRS
 {
     using System.Reflection;
+    using Commands;
+    using Events;
+    using FluentValidation;
+    using Queries;
     using SimpleInjector;
+    using Validation;
 
     public static class CQRSRegistry
     {
@@ -13,14 +18,16 @@
         public static void Register(Container container, params Assembly[] assemblies)
         {
             container.Register<IMediator, SimpleInjectorMediator>();
+            container.Register<IValidatorFactory, SimpleInjectorValidatorFactory>();
 
             container.Register(typeof(IQueryHandler<,>), assemblies);
             container.Register(typeof(ICommandHandler<,>), assemblies);
             container.RegisterCollection(typeof(IEventHandler<>), assemblies);
 
+            container.Register(typeof(IValidator<>), assemblies);
+
             // null validators
-            container.RegisterConditional(typeof(ICommandValidator<>), typeof(NullCommandValidator<>), c => !c.Handled);
-            container.RegisterConditional(typeof(IQueryValidator<>), typeof(NullQueryValidator<>), c => !c.Handled);
+            container.RegisterConditional(typeof(IValidator<>), typeof(NullValidator<>), c => !c.Handled);
         }
     }
 }

@@ -1,6 +1,7 @@
-﻿namespace MadMoose.CQRS.Specifications
+﻿namespace MadMoose.CQRS.Specifications.Fakes
 {
     using System.Threading.Tasks;
+    using Commands;
 
     public class FakeCommandHandler : ICommandHandler<FakeCommand, Nothing>
     {

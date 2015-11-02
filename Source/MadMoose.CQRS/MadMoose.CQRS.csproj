@@ -50,21 +50,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CQRSRegistry.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="ICommandHandler.cs" />
-    <Compile Include="ICommandValidator.cs" />
-    <Compile Include="IEvent.cs" />
-    <Compile Include="IEventHandler.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Commands\ICommandHandler.cs" />
+    <Compile Include="Events\IEvent.cs" />
+    <Compile Include="Events\IEventHandler.cs" />
     <Compile Include="IMediator.cs" />
-    <Compile Include="IQuery.cs" />
-    <Compile Include="IQueryHandler.cs" />
-    <Compile Include="IQueryValidator.cs" />
+    <Compile Include="Queries\IQuery.cs" />
+    <Compile Include="Queries\IQueryHandler.cs" />
     <Compile Include="Nothing.cs" />
-    <Compile Include="NullCommandValidator.cs" />
-    <Compile Include="NullQueryValidator.cs" />
+    <Compile Include="Validation\NullValidator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SimpleInjectorMediator.cs" />
-    <Compile Include="ValidationException.cs" />
+    <Compile Include="Validation\SimpleInjectorValidatorFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
