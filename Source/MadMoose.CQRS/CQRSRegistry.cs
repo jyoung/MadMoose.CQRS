@@ -24,10 +24,13 @@
             container.Register(typeof(ICommandHandler<,>), assemblies);
             container.RegisterCollection(typeof(IEventHandler<>), assemblies);
 
-            container.Register(typeof(IValidator<>), assemblies);
+            // validators
+            container.RegisterCollection(typeof(IValidator<ICommand>), assemblies);
+            container.RegisterCollection(typeof(IValidator<IQuery>), assemblies);
 
             // null validators
-            container.RegisterConditional(typeof(IValidator<>), typeof(NullValidator<>), c => !c.Handled);
+            container.RegisterConditional(typeof(IValidator<ICommand>), typeof(NullValidator<ICommand>), c => !c.Handled);
+            container.RegisterConditional(typeof(IValidator<IQuery>), typeof(NullValidator<IQuery>), c => !c.Handled);
         }
     }
 }
