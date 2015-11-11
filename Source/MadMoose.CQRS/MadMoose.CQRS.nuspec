@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>MadMoose.CQRS</id>
-    <version>1.1.3</version>
+    <version>1.1.4</version>
     <title>MadMoose.CQRS</title>
     <authors>Joe Young</authors>
     <owners>Mad Moose Software</owners>
