@@ -1,6 +1,7 @@
 ﻿namespace MadMoose.CQRS.Validation
 {
     using System;
+    using System.Linq;
     using FluentValidation;
     using SimpleInjector;
 
@@ -14,7 +15,13 @@
 
         public override IValidator CreateInstance(Type validatorType)
         {
-            return container.GetInstance(validatorType) as IValidator;
+            var validators = container.GetAllInstances(validatorType);
+            if (validators.Count() > 1)
+            {
+                // error
+            }
+
+            return validators.First() as IValidator;
         }
     }
 }

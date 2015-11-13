@@ -26,7 +26,7 @@
             container.RegisterCollection(typeof(IEventHandler<>), assemblies);
 
             // validators
-            container.Register(typeof(IValidator<>), assemblies);
+            container.RegisterCollection(typeof(IValidator<>), assemblies);
 
             // null validators
             container.RegisterConditional(typeof(IValidator<>), typeof(NullValidator<>), c => !c.Handled);
