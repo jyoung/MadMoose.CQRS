@@ -33,8 +33,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=6.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.2.1.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Shouldly, Version=2.6.0.0, Culture=neutral, PublicKeyToken=6042cbcb05cbc941, processorArchitecture=MSIL">
       <HintPath>..\packages\Shouldly.2.6.0\lib\net40\Shouldly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=3.1.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.3.1.2\lib\net45\SimpleInjector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -63,7 +71,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestSomething.cs" />
+    <Compile Include="ContainerFixture.cs" />
+    <Compile Include="EventCatcher.cs" />
+    <Compile Include="Fakes\AnotherFakeCommand.cs" />
+    <Compile Include="Fakes\AnotherFakeCommandHandler.cs" />
+    <Compile Include="Fakes\AnotherFakeQuery.cs" />
+    <Compile Include="Fakes\AnotherFakeQueryHandler.cs" />
+    <Compile Include="Fakes\FakeCommand.cs" />
+    <Compile Include="Fakes\FakeCommandHandler.cs" />
+    <Compile Include="Fakes\FakeCommandValidator.cs" />
+    <Compile Include="Fakes\FakeEvent.cs" />
+    <Compile Include="Fakes\FakeEventHandler1.cs" />
+    <Compile Include="Fakes\FakeEventHandler2.cs" />
+    <Compile Include="Fakes\FakeQuery.cs" />
+    <Compile Include="Fakes\FakeQueryHandler.cs" />
+    <Compile Include="Fakes\FakeQueryValidator.cs" />
+    <Compile Include="MediatorTests.cs" />
+    <Compile Include="RegistryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
