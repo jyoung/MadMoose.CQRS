@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <PackageId>MadMoose.CQRS</PackageId>
+    <Version>2.0.0</Version>
+    <Authors>Joe Young</Authors>
+    <Company>Mad Moose Software</Company>
   </PropertyGroup>
 
   <ItemGroup>
