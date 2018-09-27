@@ -24,7 +24,7 @@
             Container.Register<IValidatorFactory, SimpleInjectorValidatorFactory>();
             Container.Register(typeof(ICommandHandler<,>), assemblies);
             Container.Register(typeof(IQueryHandler<,>), assemblies);
-            Container.RegisterCollection(typeof(IEventHandler<>), assemblies);
+            Container.Collection.Register(typeof(IEventHandler<>), assemblies);
 
             Container.Register(typeof(IValidator<>), assemblies);
 

@@ -23,13 +23,26 @@
             // handlers
             container.Register(typeof(IQueryHandler<,>), assemblies);
             container.Register(typeof(ICommandHandler<,>), assemblies);
-            container.RegisterCollection(typeof(IEventHandler<>), assemblies);
+            container.Collection.Register(typeof(IEventHandler<>), assemblies);
 
             // validators
-            container.RegisterCollection(typeof(IValidator<>), assemblies);
+            container.Collection.Register(typeof(IValidator<>), assemblies);
 
             // null validators
             container.RegisterConditional(typeof(IValidator<>), typeof(NullValidator<>), c => !c.Handled);
+        }
+
+        /// <summary>
+        /// Register the CQRS objects and all handlers in the supplied assemblies
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="assemblies"></param>
+        /// <returns></returns>
+        public static Container AddCQRS(this Container container, params Assembly[] assemblies)
+        {
+            Register(container, assemblies);
+
+            return container;
         }
     }
 }
