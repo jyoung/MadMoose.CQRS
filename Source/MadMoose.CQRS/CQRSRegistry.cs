@@ -15,21 +15,21 @@
         /// </summary>
         /// <param name="container"></param>
         /// <param name="assemblies"></param>
-        public static void Register(Container container, params Assembly[] assemblies)
-        {
-            container.Register<IMediator, SimpleInjectorMediator>();
-            container.Register<IValidatorFactory, SimpleInjectorValidatorFactory>();
+        // public static void Register(Container container, params Assembly[] assemblies)
+        // {
+        //     container.Register<IMediator, SimpleInjectorMediator>();
+        //     container.Register<IValidatorFactory, SimpleInjectorValidatorFactory>();
 
-            // handlers
-            container.Register(typeof(IQueryHandler<,>), assemblies);
-            container.Register(typeof(ICommandHandler<,>), assemblies);
-            container.RegisterCollection(typeof(IEventHandler<>), assemblies);
+        //     // handlers
+        //     container.Register(typeof(IQueryHandler<,>), assemblies);
+        //     container.Register(typeof(ICommandHandler<,>), assemblies);
+        //     container.RegisterCollection(typeof(IEventHandler<>), assemblies);
 
-            // validators
-            container.RegisterCollection(typeof(IValidator<>), assemblies);
+        //     // validators
+        //     container.RegisterCollection(typeof(IValidator<>), assemblies);
 
-            // null validators
-            container.RegisterConditional(typeof(IValidator<>), typeof(NullValidator<>), c => !c.Handled);
-        }
+        //     // null validators
+        //     container.RegisterConditional(typeof(IValidator<>), typeof(NullValidator<>), c => !c.Handled);
+        // }
     }
 }

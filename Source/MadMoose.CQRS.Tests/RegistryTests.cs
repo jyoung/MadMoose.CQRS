@@ -10,16 +10,18 @@
         public void When_registering_assembly_components_it_should_verify()
         {
             // ARRAGE
-            var container = new Container();
+        //     var container = new Container();
 
-            // register objects with the container
-            var assemblies = new[] {Assembly.GetExecutingAssembly()};
+        //     // register objects with the container
+        //     var assemblies = new[] {Assembly.GetExecutingAssembly()};
 
-            // ACT
-            CQRSRegistry.Register(container, assemblies);
+        //     // ACT
+        //     CQRSRegistry.Register(container, assemblies);
 
-            // ASSERT
-            container.Verify();
+        //     // ASSERT
+        //     container.Verify();
+
+            Assert.False(true, "Not Implemented");
         }
        
     }
