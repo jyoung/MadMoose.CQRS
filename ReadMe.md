@@ -1,4 +1,4 @@
-# Project Name
+# MadMoose.CQRS
 
 Simple library for implemention Command Query Responsiblity Seperation (CQRS) as an application pattern.
 
